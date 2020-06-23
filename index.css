@@ -39,7 +39,7 @@ html,body{
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
-    overflow:auto;
+    /* overflow:auto; */
 }
 .list{
     background-color: #ebecf0;
@@ -73,6 +73,17 @@ h2{
     z-index: 1;
     min-height: 0;
 }
+.placeholder-list{
+    background-color: #5a565a6c;
+}
+
+.placeholder-card{
+    background-color: rgba(44, 41, 41, 0.24);
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    display:block;
+    margin-bottom: 8px;
+}
 
 .list-card{
     background-color: #fff;
@@ -92,14 +103,4 @@ h2{
     padding: 6px 8px 2px;
     position: relative;
     z-index: 10;
-}
-
-.placeholder-list{
-    background-color: #5a565a6c;
-}
-.placeholder-card{
-    background-color: rgb(44, 41, 41);
-    box-shadow: 0 1px 0 rgba(9,30,66,.25);
-    display:block;
-    margin-bottom: 8px;
 }

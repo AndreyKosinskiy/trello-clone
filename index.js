@@ -1,12 +1,11 @@
 $( function() {
     $( ".board" ).sortable({
-      // connectWith: ".board",
       placeholder: "placeholder-list",
-      forceHelperSize: true,
       forcePlaceholderSize: true,
       revert: true,
-      tolerance: "pointer",
+      zIndex: 10000,
       sort: function (event, ui) {
+        // Source: https://stackoverflow.com/questions/10637095/jquery-ui-sortable-tolerance-option-not-working-as-expected/10699339
         var that = $(this),
             w = ui.helper.outerWidth();
         that.children().each(function () {
@@ -27,26 +26,16 @@ $( function() {
     }).disableSelection();
 
     $( ".list-cards" ).sortable({
-      // connectWith: ".board",
+      appendTo: document.body,
+      connectWith: ".js-list-cards",
+      // items:".list-card",
       placeholder: "placeholder-card",
-      forceHelperSize: true,
+      forceHelperSize:true,
       forcePlaceholderSize: true,
       revert: true,
-      refreshPositions:true
+      dropOnEmpty: true,
+      zIndex: 10000
     }).disableSelection();
 
-    $( ".list-card" ).droppable({
-      accept: ".list-cards",
-      greedy: true
-    });
-    
-
-
-  //   $( ".list-wrapper" ).draggable({
-  //       connectToSortable: ".board",
-  //       helper:'original',
-  //       cursor: "pointer",
-  //       refreshPositions: true,
-  //     }).disableSelection();
-
+    $( ".list-card" ).droppable().disableSelection();
   });
