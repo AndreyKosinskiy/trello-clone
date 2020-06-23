@@ -39,6 +39,7 @@ html,body{
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
+    overflow:auto;
 }
 .list{
     background-color: #ebecf0;
