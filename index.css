@@ -1,0 +1,104 @@
+html,body{
+    height: 100%;
+    background-color: rgb(75, 191, 107)
+}
+.board-content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.board-header{
+    height: 10%;
+    /* height: auto; */
+    padding: 8px 4px 4px 8px;
+    position: relative;
+    transition: padding .1s ease-in;
+}
+
+.board{
+    user-select: none;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 8px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    height: 100%;
+}
+
+.list-wrapper{
+    width: 272px;
+    margin: 0 4px;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.list{
+    background-color: #ebecf0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    position: relative;
+    white-space: normal;
+}
+
+.list-header{
+    flex: 0 0 auto;
+    padding: 10px 8px;
+    margin:0;
+    position: relative;
+    min-height: 20px;
+}
+
+h2{
+    margin: 0;
+}
+.list-cards{
+    flex: 1 1 auto;
+    margin-bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0 4px;
+    padding: 0 4px;
+    z-index: 1;
+    min-height: 0;
+}
+
+.list-card{
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    cursor: pointer;
+    display: block;
+    margin-bottom: 8px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+    text-decoration: none;
+}
+
+.list-card-detail{
+    overflow: hidden;
+    padding: 6px 8px 2px;
+    position: relative;
+    z-index: 10;
+}
+
+.placeholder-list{
+    background-color: #5a565a6c;
+}
+.placeholder-card{
+    background-color: rgb(44, 41, 41);
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    display:block;
+    margin-bottom: 8px;
+}
