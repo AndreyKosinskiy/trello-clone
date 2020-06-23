@@ -1,16 +1,58 @@
 html,body{
     height: 100%;
-    background-color: rgb(75, 191, 107)
+    background-color: rgb(75, 191, 107);
+    margin-bottom: 0;
+    margin-top: 0;
 }
+
+.board-canvas {
+    position: relative;
+    flex-grow: 1;
+}
+/* Button */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .board-content{
+    position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .board-header{
-    height: 10%;
-    /* height: auto; */
+    height: auto;
     padding: 8px 4px 4px 8px;
     position: relative;
     transition: padding .1s ease-in;
@@ -19,20 +61,26 @@ html,body{
 .board{
     user-select: none;
     white-space: nowrap;
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
     overflow-x: auto;
     overflow-y: hidden;
-    padding-bottom: 8px;
+    /* padding-bottom: 8px; */
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    /* height: 100%; */
+    position:absolute;
+
     display: flex;
-    height: 100%;
+    flex-grow: 1;
 }
 
 .list-wrapper{
+    flex: 1 0 auto;
     width: 272px;
+    max-width: 272px;
+    min-width: 272px;
     margin: 0 4px;
     height: 100%;
     box-sizing: border-box;
@@ -70,12 +118,15 @@ h2{
     overflow-x: hidden;
     margin: 0 4px;
     padding: 0 4px;
-    /* z-index: 1; */
+    z-index: 1;
     min-height: 2rem;
 }
 
 .placeholder-list{
     background-color: #5a565a6c;
+    width: 272px;
+    max-width: 272px;
+    min-width: 272px;
 }
 
 .placeholder-card{
@@ -98,6 +149,7 @@ h2{
     min-height: 20px;
     position: relative;
     text-decoration: none;
+    z-index: 0;
 }
 
 .list-card-cover {
