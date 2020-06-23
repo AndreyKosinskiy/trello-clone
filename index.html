@@ -4,7 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Sortable - Portlets</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="index.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="index.js"></script>
 </head>
 <body>
     <div class="board-content">
@@ -15,8 +19,48 @@
                     <div class="list-header"><h2>Deck 1</h2></div>
                     <div class="list-cards js-list-cards ">
                         <a href="" class="list-card">
+                            <div class="list-card-cover js-card-cover is-covered" style="height: 163.33333333333334px;background-color: #040404;background-image: url(&quot;https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/a254404e759a0139a60e2e1054a0f706/photo-1592492159418-39f319320569.jpg&quot;);background-size: cover;"></div>
                             <div class="list-card-detail">
+                                <div class="list-card-labels js-card-labels">
+                                    <span class="card-label card-label-green mod-card-front" title="">
+                                        <span class="label-text">&nbsp;</span>
+                                    </span>
+                                    <span class="card-label card-label-yellow mod-card-front" title="">
+                                        <span class="label-text">&nbsp;</span>
+                                    </span>
+                                </div>
                                 <span class="list-card-title">Card 1</span>
+                                <div class="badges">
+                                    <span class="js-badges">
+                                        <div class="badge is-icon-only" title="Вы подписаны на эту карточку.">
+                                            <span class="badge-icon icon-sm icon-subscribe"></span>
+                                        </div>
+                                        <div class="badge js-due-date-badge is-due-soon" title="До истечения срока карточки осталось менее 24 часов.">
+                                            <span class="badge-icon icon-sm icon-clock badge-due-icon"></span>
+                                            <input class="mod-due-complete-checkbox" type="checkbox">
+                                            <span class="badge-text js-due-date-text">24 июня</span>
+                                        </div>
+                                        <div class="badge is-icon-only" title="Эта карточка с описанием.">
+                                            <span class="badge-icon icon-sm icon-description"></span>
+                                        </div>
+                                        <div class="badge js-checkitems-badge" title="Элементы списка задач">
+                                            <span class="badge-icon icon-sm icon-checklist"></span>
+                                            <span class="badge-text js-checkitems-badge-text">2/3</span>
+                                        </div>
+                                    </span>
+                                    <span class="custom-field-front-badges js-custom-field-badges">
+                                        <span></span>
+                                    </span>
+                                    <span class="js-plugin-badges">
+                                        <span></span>
+                                    </span>
+                                </div>
+                                <div class="list-card-members js-list-card-members">
+                                    <div class="member js-member-on-card-menu" data-idmem="5ecba65b8d66881980fc738c">
+                                        <span class="member-initials" title="Andrey Kosinskiy (andreykosinskiy1)" aria-label="Andrey Kosinskiy (andreykosinskiy1)">AK</span>
+                                        <span class="member-gold-badge" title="Участник с Trello Gold." aria-label="Участник с Trello Gold."></span>
+                                    </div>
+                                </div>
                             </div>
                         </a>
                         <a href="" class="list-card">
@@ -58,9 +102,5 @@
             </div>
         </div>
     </div>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="index.js"></script>
 </body>
 </html>

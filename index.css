@@ -70,9 +70,10 @@ h2{
     overflow-x: hidden;
     margin: 0 4px;
     padding: 0 4px;
-    z-index: 1;
-    min-height: 0;
+    /* z-index: 1; */
+    min-height: 2rem;
 }
+
 .placeholder-list{
     background-color: #5a565a6c;
 }
@@ -83,6 +84,7 @@ h2{
     box-shadow: 0 1px 0 rgba(9,30,66,.25);
     display:block;
     margin-bottom: 8px;
+    /* z-index: 1; */
 }
 
 .list-card{
@@ -98,9 +100,112 @@ h2{
     text-decoration: none;
 }
 
+.list-card-cover {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.list-card.is-covered, .list-card-cover {
+    border-radius: 3px 3px 0 0;
+}
+
+.list-card-labels {
+    overflow: auto;
+    position: relative;
+}
+
+.card-label.mod-card-front {
+    float: left;
+    font-size: 12px;
+    font-weight: 700;
+    height: 8px;
+    line-height: 100px;
+    margin: 0 4px 4px 0;
+    max-width: 40px;
+    min-width: 40px;
+    padding: 0;
+    text-shadow: none;
+    width: auto;
+}
+
+.card-label {
+    background-color: #b3bac5;
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    margin-right: 4px;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 4px 6px;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card-label-green {
+    background-color: #61bd4f;
+}
+
+.card-label-yellow {
+    background-color: #f2d600;
+}
+
 .list-card-detail{
     overflow: hidden;
     padding: 6px 8px 2px;
     position: relative;
     z-index: 10;
+}
+
+.badges {
+    float: left;
+    max-width: 100%;
+    margin-left: -2px;
+}
+.badge {
+    color: #5e6c84;
+    display: inline-block;
+    margin: 0 4px 4px 0;
+    max-width: 100%;
+    min-height: 20px;
+    overflow: hidden;
+    position: relative;
+    padding: 2px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.list-card-members {
+    float: right;
+    margin: 0 -2px 0 0;
+}
+
+.list-card-members .member {
+    height: 28px;
+    width: 28px;
+    float: right;
+    margin: 0 0 4px 4px;
+}
+
+.member {
+    background-color: #dfe1e6;
+    border-radius: 25em;
+    color: #172b4d;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 32px;
+    margin: 0 4px 4px 0;
+    overflow: visible;
+    position: relative;
+    width: 32px;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 0;
 }
