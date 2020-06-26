@@ -1,19 +1,23 @@
 documents_as_json = {
 	lists: {
         1:{
+            id:1,
             title:"List 1",
             cards:{
                 10:{
+                    id:10,
                     title:"Card 10",
 
                 },
                 11:{
+                    id:11,
                     title:"Card 11",
 
                 },
                 12:{
+                    id:12   ,
                     title:"Card 12",
-                    
+
                 }
             }
         },

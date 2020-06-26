@@ -51,6 +51,8 @@ var list_cover = $('<a  class="list-card-cover js-card-cover is-covered" />');
 var list_card_detail = $('<div class="list-card-detail" />');
 var emptyCard = list_card.append([ list_cover, list_card_detail ]);
 
+console.log()
+
 var list_card_labels = $('<div class="list-card-labels js-card-labels">');
 var list_card_label = $(
 	'<span class="card-label mod-card-front" title=""><span class="label-text">&nbsp;</span></span>'
@@ -67,23 +69,27 @@ var list_card_members = $('<div class="list-card-members js-list-card-members" /
 var member = $('<div class="member js-member-on-card-menu" />');
 var member_initials = $('<span class="member-initials" />');
 
-function getEmptyListElement(leaf) {
+function getEmptyListElement(container_name_by_css,container_element) {
     var _emptyListElement = emptyListElement;
+    _emptyListElement.appendTo($('.'+container_name_by_css))
+    console.log("Added EmptyListElement to ." + container_name_by_css)
 	return _emptyListElement
 }
 
-function setListTitle(listElement,title){
-    listElement.find('.js-list-header-title').text(title);
+function setListTitle(container_element,title){
+    container_element.find('.js-list-header-title').text(title);
 }
 
 function _calculateStyleCover() {
     return {}
 }
 
-function getEmptyListCard(leaf) {
+function getEmptyListCard(container_name_by_css,container_element) {
 	var _emptyCard = emptyCard;
 	var calculateStyleCover = _calculateStyleCover();
-	return _emptyCard.find('.js-card-cover').css(calculateStyleCover);
+    _emptyCard.find('.js-card-cover').css(calculateStyleCover);
+    _emptyCard.appendTo(container_element.find('.js-list-cards'))
+    return _emptyCard
 }
 
 function getEmptyListCardLabels(labels) {
@@ -99,10 +105,10 @@ function _getEmptyLabel(label) {
 	return _listCardlabel.addClass(label.className);
 }
 
-function setCardTitle(element,title){
+function setCardTitle(container_element,title){
     _list_card_title = list_card_title
     _list_card_title.text(title)
-    element.append(_list_card_title)
+    container_element.find('.list-card-detail').append(_list_card_title)
 }
 
 function getEmptyBadgets(badgets) {
@@ -145,6 +151,11 @@ function _getEmptyMember(member_obj) {
 	return _member.append(_member_initials);
 }
 
+function setId(element,id){
+    console.log('set id : ' + id)
+    element.attr('id',id)
+}
+
 creatorElementFunction = {
     lists: getEmptyListElement,
 	cards: getEmptyListCard,
@@ -154,39 +165,49 @@ creatorElementFunction = {
 };
 
 changerElementFunction = {
+    lists_id:setId,
     lists_title:setListTitle,
+    cards_id:setId,
     cards_title:setCardTitle,
+
 }
 
 
 // if obj has property, which has value as obj, then obj key is ID
 
-function createElementWalker(documents_as_json, container_name = null, element = null) {
-    var _container_name = container_name
-    var _element = element
-	for (key in documents_as_json) {
-        var newleaf = documents_as_json[key];
-        if (key in creatorElementFunction){
-            _container_name_for_properties = key
-        }
-		if (typeof newleaf == 'object') {
-            if (_container_name in creatorElementFunction || _container_name == null){
-               if(_container_name != null){
-                   if (_element != null){
-                    _element.append(creatorElementFunction[_container_name]())
-                   }else{
-                    _element = creatorElementFunction[_container_name]()
-                   }
-               }
+function createElementWalker(documents_as_json, container_name = null, container_element = null) {
+    var _documents_as_json = documents_as_json
+    var current_container_name = container_name
+    var current_container_element = container_element
+
+
+    console.log(documents_as_json)
+    for (key in _documents_as_json){
+        // if key has value we can we go deeper
+        var leaf_value = documents_as_json[key]
+        if (typeof leaf_value == 'object' ){
+            if (key in creatorElementFunction){
+                var create_container_name =  key
+            }else{
+                var create_container_name =  current_container_name
             }
-            createElementWalker(documents_as_json = newleaf, container_name = key, element = _element); 
+            console.log("Will be created :" + create_container_name)
+            createElementWalker(leaf_value,container_name = create_container_name ,container_element = creatorElementFunction[create_container_name](container_name = current_container_name, container_element= current_container_element))
+            console.log(documents_as_json[key])
+
         }else{
-            console.log(_container_name_for_properties + '_'+ key)
-            console.log(_element)
-            changerElementFunction[_container_name_for_properties + '_'+ key](_element, newleaf)
+            console.log('Property: ' + current_container_name+'_'+key)
+            var func_as_key = container_name+'_'+key
+            if (func_as_key in changerElementFunction){
+                changerElementFunction[func_as_key](current_container_element,leaf_value)
+            }
         }
     }
-    return _element
+
+
 }
 
-createElementWalker(documents_as_json)
+$( function() {
+    createElementWalker(documents_as_json,current_container_name='board')
+})
+

@@ -51,5 +51,4 @@ $( function() {
     $( ".list-card" ).droppable({
         connectToSortable:"list-cards"
     }).disableSelection();
-
   });
