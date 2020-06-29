@@ -1,7 +1,8 @@
 documents_as_json = {
 	lists: {
         1:{
-            title:"List 1",
+            id:'1',
+            title:'List 1',
             cards:{
                 10:{
                     title:"Card 10",
@@ -15,6 +16,7 @@ documents_as_json = {
             }
         },
         2:{
+            id:'2',
             title:"List 2",
             cards:{
                 20:{
@@ -26,6 +28,7 @@ documents_as_json = {
             }
         },
         3:{
+            id:'3',
             title:"List 3",
             cards:{
                 30:{
@@ -69,10 +72,11 @@ var list_card_members = $('<div class="list-card-members js-list-card-members" /
 var member = $('<div class="member js-member-on-card-menu" />');
 var member_initials = $('<span class="member-initials" />');
 
-function getEmptyListElement(container_name_by_css,container_element) {
-    var _emptyListElement = emptyListElement;
-    _emptyListElement.appendTo($('.'+container_name_by_css))
-    console.log("Added EmptyListElement to ." + container_name_by_css)
+function getEmptyListElement(container_element) {
+    var _emptyListElement = emptyListElement.clone(true,true);
+    console.log(container_element)
+    _emptyListElement.appendTo(container_element)
+    console.log('Added EmptyListElement!')
 	return _emptyListElement
 }
 
@@ -84,8 +88,8 @@ function _calculateStyleCover() {
     return {}
 }
 
-function getEmptyListCard(container_name_by_css,container_element) {
-	var _emptyCard = emptyCard;
+function getEmptyListCard(container_element) {
+	var _emptyCard = emptyCard.clone(true,true);
 	var calculateStyleCover = _calculateStyleCover();
     _emptyCard.find('.js-card-cover').css(calculateStyleCover);
     _emptyCard.appendTo(container_element.find('.js-list-cards'))
@@ -106,7 +110,7 @@ function _getEmptyLabel(label) {
 }
 
 function setCardTitle(container_element,title){
-    _list_card_title = list_card_title
+    _list_card_title = list_card_title.clone(true,true)
     _list_card_title.text(title)
     container_element.find('.list-card-detail').append(_list_card_title)
 }
@@ -180,23 +184,24 @@ function createElementWalker(documents_as_json, container_name = null, container
     var current_container_name = container_name
     var current_container_element = container_element
 
-
-    console.log(documents_as_json)
     for (key in _documents_as_json){
-        // if key has value we can we go deeper
-        var leaf_value = documents_as_json[key]
+        var leaf_value = _documents_as_json[key]
         if (typeof leaf_value == 'object' ){
-            if (key in creatorElementFunction){
-                var create_container_name =  key
-            }else{
-                var create_container_name =  current_container_name
-            }
-            console.log("Will be created :" + create_container_name)
-            createElementWalker(leaf_value,container_name = create_container_name ,container_element = creatorElementFunction[create_container_name](container_name = current_container_name, container_element= current_container_element))
-            console.log(documents_as_json[key])
 
+            // console.log(current_container_element)
+            // console.log(leaf_value)
+
+            if (key in creatorElementFunction){
+                var n = key
+                var e = container_element
+            }else{
+                var n = current_container_name
+                var e = creatorElementFunction[current_container_name](current_container_element)
+            }
+            // console.log("Will be created :" + n)
+            createElementWalker(documents_as_json = leaf_value, container_name = n, container_element = e)
         }else{
-            console.log('Property: ' + current_container_name+'_'+key)
+            console.log('Property: ' + current_container_name +'_'+key)
             var func_as_key = container_name+'_'+key
             if (func_as_key in changerElementFunction){
                 changerElementFunction[func_as_key](current_container_element,leaf_value)
@@ -208,6 +213,6 @@ function createElementWalker(documents_as_json, container_name = null, container
 }
 
 $( function() {
-    createElementWalker(documents_as_json,current_container_name='board')
+    createElementWalker(documents_as_json,container_name='board',container_element = $('.board'))
 })
 
