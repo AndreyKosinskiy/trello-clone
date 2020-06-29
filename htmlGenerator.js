@@ -6,6 +6,17 @@ documents_as_json = {
             cards:{
                 10:{
                     title:"Card 10",
+                    labels:{
+                        1:{
+                            className:'card-label-green'
+                        },
+                        2:{
+                            className:'card-label-yellow'
+                        }
+                    },
+                    badges:{
+                        date:''
+                    }
                 },
                 11:{
                     title:"Card 11",
@@ -51,10 +62,9 @@ var emptyListElement = list_wrapper.append(list.append([ list_header, list_cards
 
 var list_card = $('<a  class="list-card" />');
 var list_cover = $('<a  class="list-card-cover js-card-cover is-covered" />');
-var list_card_detail = $('<div class="list-card-detail" />');
+var list_card_detail = $('<div class="list-card-detail"><div class="list-card-labels js-card-labels"></div>');
 var emptyCard = list_card.append([ list_cover, list_card_detail ]);
 
-console.log()
 
 var list_card_labels = $('<div class="list-card-labels js-card-labels">');
 var list_card_label = $(
@@ -96,16 +106,14 @@ function getEmptyListCard(container_element) {
     return _emptyCard
 }
 
-function getEmptyListCardLabels(labels) {
-	var _listCardLabels = list_card_labels;
-	for (label in labels) {
-		_listCardLabels.append(getEmptyLabel(label));
-	}
-	return _listCardLabels;
+function getEmptyListCardLabel(container_element) {
+	var _listCardLabel = list_card_labels.clone(true,true);
+    _listCardLabel.appendTo(container_element.find('.js-card-labels'))
+	return _listCardLabel;
 }
 
-function _getEmptyLabel(label) {
-	var _listCardlabel = list_card_label;
+function setEmptyLabel(container_element) {
+	var _listCardlabel = list_card_label.clone(true,true);
 	return _listCardlabel.addClass(label.className);
 }
 
@@ -159,12 +167,16 @@ function setId(element,id){
     console.log('set id : ' + id)
     element.attr('id',id)
 }
+function setLabelClassName(element,className){
+    element.attr('class','card-label '+className+' mod-card-front')
+    // card-label card-label-green mod-card-front
+}
 
 creatorElementFunction = {
     lists: getEmptyListElement,
 	cards: getEmptyListCard,
 	badgets: getEmptyBadgets,
-	labels: getEmptyListCardLabels,
+	labels: getEmptyListCardLabel,
 	members: getEmptyListCardMembers
 };
 
@@ -173,7 +185,7 @@ changerElementFunction = {
     lists_title:setListTitle,
     cards_id:setId,
     cards_title:setCardTitle,
-
+    labels_className:setLabelClassName
 }
 
 
@@ -187,10 +199,6 @@ function createElementWalker(documents_as_json, container_name = null, container
     for (key in _documents_as_json){
         var leaf_value = _documents_as_json[key]
         if (typeof leaf_value == 'object' ){
-
-            // console.log(current_container_element)
-            // console.log(leaf_value)
-
             if (key in creatorElementFunction){
                 var n = key
                 var e = container_element
@@ -198,7 +206,6 @@ function createElementWalker(documents_as_json, container_name = null, container
                 var n = current_container_name
                 var e = creatorElementFunction[current_container_name](current_container_element)
             }
-            // console.log("Will be created :" + n)
             createElementWalker(documents_as_json = leaf_value, container_name = n, container_element = e)
         }else{
             console.log('Property: ' + current_container_name +'_'+key)
@@ -208,8 +215,6 @@ function createElementWalker(documents_as_json, container_name = null, container
             }
         }
     }
-
-
 }
 
 $( function() {
